@@ -1,9 +1,6 @@
 package com.perestoronin.taskmanagerlite.service;
 
-import com.perestoronin.taskmanagerlite.dto.FullTaskResponseDto;
-import com.perestoronin.taskmanagerlite.dto.TaskCreateDto;
-import com.perestoronin.taskmanagerlite.dto.TaskResponseDto;
-import com.perestoronin.taskmanagerlite.dto.TaskStatusUpdateDto;
+import com.perestoronin.taskmanagerlite.dto.*;
 import com.perestoronin.taskmanagerlite.entity.Tasks;
 import com.perestoronin.taskmanagerlite.mapper.TaskMapper;
 import com.perestoronin.taskmanagerlite.repository.TaskRepository;
@@ -52,4 +49,21 @@ public class TaskService {
         taskRepository.save(currTask);
         return taskMapper.toTaskResponseDto(currTask);
     }
+
+    @Transactional
+    public TaskResponseDto updateTask(Long id, @Valid TaskUpdateDto dto) {
+        Tasks currTask = taskRepository.getTasksById(id);
+        if (dto.getName() != null && !dto.getName().equals("")) {
+            currTask.setName(dto.getName());
+        }
+        if (dto.getDescription() != null && !dto.getDescription().equals("")) {
+            currTask.setDescription(dto.getDescription());
+        } else if (dto.getDescription() == null) {
+            currTask.setDescription(null);
+        }
+        taskRepository.save(currTask);
+        return taskMapper.toTaskResponseDto(currTask);
+    }
+
+
 }

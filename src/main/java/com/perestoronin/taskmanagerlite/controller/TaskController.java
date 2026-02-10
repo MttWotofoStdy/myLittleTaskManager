@@ -1,9 +1,6 @@
 package com.perestoronin.taskmanagerlite.controller;
 
-import com.perestoronin.taskmanagerlite.dto.FullTaskResponseDto;
-import com.perestoronin.taskmanagerlite.dto.TaskCreateDto;
-import com.perestoronin.taskmanagerlite.dto.TaskResponseDto;
-import com.perestoronin.taskmanagerlite.dto.TaskStatusUpdateDto;
+import com.perestoronin.taskmanagerlite.dto.*;
 import com.perestoronin.taskmanagerlite.entity.TaskStatus;
 import com.perestoronin.taskmanagerlite.service.TaskService;
 import jakarta.validation.Valid;
@@ -49,4 +46,8 @@ public class TaskController {
     public ResponseEntity<TaskResponseDto> changeStatus(@PathVariable Long id, @Valid @RequestBody TaskStatusUpdateDto newStatus) {
         return ResponseEntity.ok(taskService.changeStatus(id, newStatus));
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<TaskResponseDto> changeNameOrDesc(@PathVariable Long id,@Valid @RequestBody  TaskUpdateDto dto){
+        return ResponseEntity.ok(taskService.updateTask(id, dto));
+}
 }
