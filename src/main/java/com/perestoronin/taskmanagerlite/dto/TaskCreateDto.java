@@ -13,5 +13,4 @@ public class TaskCreateDto {
     @NotNull
     private String name;
     private String description;
-
 }

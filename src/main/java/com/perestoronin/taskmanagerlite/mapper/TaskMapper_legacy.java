@@ -6,7 +6,7 @@
 //import com.perestoronin.taskmanagerlite.entity.Tasks;
 //
 //
-//public interface TaskMapper {
+//public interface TaskMapper_legacy {
 //    FullTaskResponseDto toFullTaskResponseDto(Tasks task);
 //    TaskResponseDto toTaskResponseDto(Tasks task);
 //    Tasks toTask(TaskCreateDto taskCreateDto);

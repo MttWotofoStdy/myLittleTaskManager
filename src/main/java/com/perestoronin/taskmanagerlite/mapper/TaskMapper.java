@@ -8,7 +8,7 @@ import com.perestoronin.taskmanagerlite.entity.Tasks;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TaskMapperImpl  {
+public class TaskMapper {
 
     public FullTaskResponseDto toFullTaskResponseDto(Tasks task) {
         FullTaskResponseDto dto = new FullTaskResponseDto();

@@ -6,7 +6,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "tasks")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -15,7 +16,6 @@ public class Tasks {
     @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private String name;
     @Column(nullable = true)
@@ -23,7 +23,4 @@ public class Tasks {
     @Column
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
-
-
-
 }
