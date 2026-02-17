@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class TaskStatusUpdateDto {
-    @Valid
+
     @NotNull
     private TaskStatus status;
 }
