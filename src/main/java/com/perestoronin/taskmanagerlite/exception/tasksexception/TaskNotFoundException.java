@@ -1,4 +1,4 @@
-package com.perestoronin.taskmanagerlite.exception;
+package com.perestoronin.taskmanagerlite.exception.tasksexception;
 
 public class TaskNotFoundException extends RuntimeException{
     public TaskNotFoundException (Long id) {

@@ -1,14 +1,15 @@
 package com.perestoronin.taskmanagerlite.controller;
 
-import com.perestoronin.taskmanagerlite.dto.*;
+import com.perestoronin.taskmanagerlite.dto.tasks.*;
 import com.perestoronin.taskmanagerlite.entity.TaskStatus;
-import com.perestoronin.taskmanagerlite.repository.TaskRepository;
 import com.perestoronin.taskmanagerlite.service.TaskService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class TaskController {
     private final TaskService taskService;
 
 
-    public TaskController(TaskService taskService, TaskRepository tasksRepository) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
 
     }
@@ -37,29 +38,29 @@ public class TaskController {
             @RequestParam(required = false) TaskStatus status,
             @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
-    )  {
+            @RequestParam(defaultValue = "10") int size,
+            @SortDefault.SortDefaults({
+                    @SortDefault(sort = "id", direction = Sort.Direction.ASC)
+            })
+            Sort sort
+    ) {
 
-
-        Pageable pageable = PageRequest.of(page, Math.min(size, 50));
+        Pageable pageable = PageRequest.of(page, Math.min(size, 50), sort);
         Page<TaskResponseDto> tasks = taskService.getAllTasks(status, name, pageable);
         return ResponseEntity.ok(tasks);
     }
 
-//    @GetMapping("/namedesc")
-//    public ResponseEntity<List<TaskResponseDto>> getNameDescTasks() {
-//        return ResponseEntity.ok(taskService.getAllTasks());
-//    }
+
 
     @PostMapping
-    public ResponseEntity<FullTaskResponseDto> createTask(@Valid @RequestBody TaskCreateDto taskCreateDto) {
-        return ResponseEntity.ok(taskService.createTask(taskCreateDto));
+    public ResponseEntity<FullTaskResponseDto> createTask(@Valid @RequestBody CreateTaskRequest createTaskRequest) {
+        return ResponseEntity.ok(taskService.createTask(createTaskRequest));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable @Valid @Min(1) Long id) {
             taskService.deleteTaskById(id);
-        return ResponseEntity.noContent().build();// ←как это работает?
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}/status")

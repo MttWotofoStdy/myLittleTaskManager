@@ -1,4 +1,4 @@
-package com.perestoronin.taskmanagerlite.dto;
+package com.perestoronin.taskmanagerlite.dto.tasks;
 import com.perestoronin.taskmanagerlite.entity.TaskStatus;
 import lombok.*;
 

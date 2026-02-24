@@ -1,8 +1,8 @@
 package com.perestoronin.taskmanagerlite.service;
 
+import com.perestoronin.taskmanagerlite.dto.tasks.*;
 import com.perestoronin.taskmanagerlite.entity.TaskStatus;
-import com.perestoronin.taskmanagerlite.exception.TaskNotFoundException;
-import com.perestoronin.taskmanagerlite.dto.*;
+import com.perestoronin.taskmanagerlite.exception.tasksexception.TaskNotFoundException;
 import com.perestoronin.taskmanagerlite.entity.Tasks;
 import com.perestoronin.taskmanagerlite.mapper.TaskMapper;
 import com.perestoronin.taskmanagerlite.repository.TaskRepository;
@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 @Service
 public class TaskService {
@@ -46,11 +45,10 @@ public class TaskService {
     }
 
     @Transactional
-    public FullTaskResponseDto createTask(TaskCreateDto taskCreateDto) {
-        Tasks task = taskRepository.save(taskMapper.toTask(taskCreateDto));
-        if (taskCreateDto.getName() == null && !taskCreateDto.getName().isBlank()) {
-            throw new IllegalArgumentException();
-
+    public FullTaskResponseDto createTask(CreateTaskRequest createTaskRequest) {
+        Tasks task = taskRepository.save(taskMapper.toTask(createTaskRequest));
+        if (createTaskRequest.getName() == null || createTaskRequest.getName().isBlank()) {
+            throw new IllegalArgumentException("Не может быть без названия");
         }
         return taskMapper.toFullTaskResponseDto(task);
     }

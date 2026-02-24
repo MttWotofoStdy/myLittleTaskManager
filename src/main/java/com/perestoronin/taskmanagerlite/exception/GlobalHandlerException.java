@@ -1,5 +1,6 @@
 package com.perestoronin.taskmanagerlite.exception;
 
+import com.perestoronin.taskmanagerlite.exception.tasksexception.TaskNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;

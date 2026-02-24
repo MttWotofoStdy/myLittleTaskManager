@@ -1,8 +1,8 @@
 //package com.perestoronin.taskmanagerlite.mapper;
 //
-//import com.perestoronin.taskmanagerlite.dto.FullTaskResponseDto;
+//import com.perestoronin.taskmanagerlite.dto.tasks.FullTaskResponseDto;
 //import com.perestoronin.taskmanagerlite.dto.TaskCreateDto;
-//import com.perestoronin.taskmanagerlite.dto.TaskResponseDto;
+//import com.perestoronin.taskmanagerlite.dto.tasks.TaskResponseDto;
 //import com.perestoronin.taskmanagerlite.entity.Tasks;
 //
 //

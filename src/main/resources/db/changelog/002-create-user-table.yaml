@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 2
       author: eduard
       changes:
         - createTable:
-            tableName: tasks
+            tableName: users
             columns:
               - column:
                   name: id
@@ -15,14 +15,11 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: name
-                  type: varchar
+                  type: VARCHAR
                   constraints:
                     nullable: false
               - column:
-                  name: description
-                  type: text
-              - column:
-                  name: status
-                  type: varchar
+                  name: grade
+                  type: VARCHAR
                   constraints:
                     nullable: false

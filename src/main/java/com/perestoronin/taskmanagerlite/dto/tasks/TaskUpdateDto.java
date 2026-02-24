@@ -1,16 +1,15 @@
-package com.perestoronin.taskmanagerlite.dto;
+package com.perestoronin.taskmanagerlite.dto.tasks;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class TaskCreateDto {
-    @NotNull
+public class TaskUpdateDto {
+
+    @NotNull(message = "Пустое имя")
     private String name;
+
     private String description;
 }

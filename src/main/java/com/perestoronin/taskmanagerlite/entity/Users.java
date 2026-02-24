@@ -1,26 +1,28 @@
 package com.perestoronin.taskmanagerlite.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "tasks")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Tasks {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
     @Column(nullable = false)
     private String name;
-    @Column(nullable = true)
-    private String description;
-    @Column
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TaskStatus status;
+    private Grade grade;
 }
