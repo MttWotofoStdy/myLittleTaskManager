@@ -27,12 +27,7 @@ public class TaskService {
         this.taskMapper = taskMapper;
     }
 
-//    @Transactional
-//    public List<FullTaskResponseDto> getAllFullTasks() {
-//
-//        return taskRepository.findAll().stream().map(taskMapper::toFullTaskResponseDto).toList(); //как оно работает?
-//
-//    }
+
 @Transactional
     public Page<TaskResponseDto> getAllTasks(
             TaskStatus status,
@@ -45,11 +40,11 @@ public class TaskService {
     }
 
     @Transactional
-    public FullTaskResponseDto createTask(CreateTaskRequest createTaskRequest) {
-        Tasks task = taskRepository.save(taskMapper.toTask(createTaskRequest));
-        if (createTaskRequest.getName() == null || createTaskRequest.getName().isBlank()) {
+    public AllAttribTasksDto createTask(CreateTaskRequest createTaskRequest) {
+              if (createTaskRequest.getName() == null || createTaskRequest.getName().isBlank()) {
             throw new IllegalArgumentException("Не может быть без названия");
         }
+        Tasks task = taskRepository.save(taskMapper.toTask(createTaskRequest));
         return taskMapper.toFullTaskResponseDto(task);
     }
 
@@ -74,10 +69,10 @@ public class TaskService {
 
     @Transactional
     public TaskResponseDto updateTask(Long id, @Valid TaskUpdateDto dto) {
-        Tasks currTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
-        if (dto.getName() != null && dto.getName().isBlank()) {
+                if (dto.getName() != null && dto.getName().isBlank()) {
             throw new IllegalArgumentException("Имя не может быть пустым");
         }
+        Tasks currTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         currTask.setName(dto.getName());
         if (dto.getDescription() != null && !dto.getDescription().isBlank()) {
             currTask.setDescription(dto.getDescription());
@@ -86,7 +81,7 @@ public class TaskService {
     }
 
 @Transactional
-public FullTaskResponseDto getTaskById(Long id) {
+public AllAttribTasksDto getTaskById(Long id) {
     Tasks currTask = taskRepository.findById(id)
             .orElseThrow(() -> new TaskNotFoundException(id));
     return taskMapper.toFullTaskResponseDto(currTask);}

@@ -1,6 +1,6 @@
 package com.perestoronin.taskmanagerlite.mapper;
 
-import com.perestoronin.taskmanagerlite.dto.tasks.FullTaskResponseDto;
+import com.perestoronin.taskmanagerlite.dto.tasks.AllAttribTasksDto;
 import com.perestoronin.taskmanagerlite.dto.tasks.CreateTaskRequest;
 import com.perestoronin.taskmanagerlite.dto.tasks.TaskResponseDto;
 import com.perestoronin.taskmanagerlite.entity.TaskStatus;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskMapper {
 
-    public FullTaskResponseDto toFullTaskResponseDto(Tasks task) {
-        FullTaskResponseDto dto = new FullTaskResponseDto();
+    public AllAttribTasksDto toFullTaskResponseDto(Tasks task) {
+        AllAttribTasksDto dto = new AllAttribTasksDto();
         dto.setId(task.getId());
         dto.setName(task.getName());
         dto.setDescription(task.getDescription());

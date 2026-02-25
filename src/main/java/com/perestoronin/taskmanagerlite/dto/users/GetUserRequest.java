@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor //если это getDto надо ли убрать сеттеры? Такой  же вопрос к остальным DTO где нет функционала редактирования полей
+@AllArgsConstructor
 public class GetUserRequest {
     private Long id;
     private String name;

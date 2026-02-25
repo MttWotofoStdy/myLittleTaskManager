@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class TaskUpdateDto {
 
-    @NotNull(message = "Пустое имя")
+
     private String name;
 
     private String description;

@@ -48,7 +48,7 @@ public class UserService {
     @Transactional
     public GetUserRequest createUser(CreateUserRequest createUserRequest) {
         Users us1 = userMapper.toUser(createUserRequest);
-        System.out.println(us1.getName() + " " + us1.getGrade()+ " " + us1.getId());
+
         Users users = userRepository.save(userMapper.toUser(createUserRequest));
         if (createUserRequest.getName() == null || createUserRequest.getName().isBlank()) {
             throw new IllegalArgumentException("нельзя пустое имя!");
