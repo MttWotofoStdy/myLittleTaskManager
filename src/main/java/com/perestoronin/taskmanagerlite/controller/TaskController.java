@@ -46,7 +46,7 @@ public class TaskController {
 
 
     @PostMapping
-    public ResponseEntity<AllAttribTasksDto>  Task(@Valid @RequestBody CreateTaskRequest createTaskRequest) {
+    public ResponseEntity<TaskDto>  Task(@Valid @RequestBody CreateTaskRequest createTaskRequest) {
         return ResponseEntity.ok(taskService.createTask(createTaskRequest));
     }
 
@@ -67,7 +67,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AllAttribTasksDto> getCurrTask(@PathVariable Long id) {
+    public ResponseEntity<TaskDto> getCurrTask(@PathVariable Long id) {
         if (ResponseEntity.ok(taskService.getTaskById(id)).hasBody()) {
             return ResponseEntity.ok(taskService.getTaskById(id));
         } else {

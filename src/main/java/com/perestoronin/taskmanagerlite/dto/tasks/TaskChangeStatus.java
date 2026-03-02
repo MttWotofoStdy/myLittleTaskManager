@@ -1,5 +1,6 @@
 package com.perestoronin.taskmanagerlite.dto.tasks;
 
+
 import com.perestoronin.taskmanagerlite.entity.TaskStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,4 +12,5 @@ public class TaskChangeStatus {
 
     @NotNull
     private TaskStatus status;
+
 }

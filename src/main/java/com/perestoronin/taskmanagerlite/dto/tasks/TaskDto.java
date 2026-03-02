@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AllAttribTasksDto {
+public class TaskDto {
 
     private Long id;
     private String name;

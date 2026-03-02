@@ -1,9 +1,10 @@
 package com.perestoronin.taskmanagerlite.service;
 
 import com.perestoronin.taskmanagerlite.dto.users.CreateUserRequest;
+import com.perestoronin.taskmanagerlite.dto.users.EditUserRequest;
 import com.perestoronin.taskmanagerlite.dto.users.GetUserRequest;
 
-import com.perestoronin.taskmanagerlite.entity.Users;
+import com.perestoronin.taskmanagerlite.entity.User;
 import com.perestoronin.taskmanagerlite.exception.usersexception.UserNotFoundException;
 import com.perestoronin.taskmanagerlite.mapper.UserMapper;
 import com.perestoronin.taskmanagerlite.repository.UserRepository;
@@ -41,18 +42,32 @@ public class UserService {
 
     @Transactional
     public GetUserRequest getCurrentUser(@Valid @Min(1) Long id) {
-        Users user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return userMapper.toFullUser(user);
     }
 
     @Transactional
     public GetUserRequest createUser(CreateUserRequest createUserRequest) {
-        Users us1 = userMapper.toUser(createUserRequest);
+        User us1 = userMapper.toUser(createUserRequest);
 
-        Users users = userRepository.save(userMapper.toUser(createUserRequest));
+        User user = userRepository.save(userMapper.toUser(createUserRequest));
         if (createUserRequest.getName() == null || createUserRequest.getName().isBlank()) {
             throw new IllegalArgumentException("нельзя пустое имя!");
         }
-        return userMapper.toFullUser(users);
+        return userMapper.toFullUser(user);
+    }
+
+    @Transactional
+    public  EditUserRequest editUser(Long id, EditUserRequest edUs) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        if(edUs.getName() == null || edUs.getName().isBlank()){
+            throw new IllegalArgumentException(edUs.getName());
+        }
+        if (edUs.getGrade() != null) {
+            user.setGrade(edUs.getGrade());
+        }
+        user.setName(edUs.getName());
+        userRepository.save(user);
+        return userMapper.toEditUserRequest(user);
     }
 }
