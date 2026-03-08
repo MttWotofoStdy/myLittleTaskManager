@@ -57,12 +57,12 @@ public class TaskController {
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<TaskResponseDto> changeStatus(@PathVariable Long id, @Valid @RequestBody TaskChangeStatus newStatus) {
+    public ResponseEntity<TaskResponseDto> changeStatus(@PathVariable Long id, @Valid @RequestBody PatchTaskStatusRequest newStatus) {
         return ResponseEntity.ok(taskService.changeStatus(id, newStatus));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskResponseDto> changeNameOrDesc(@PathVariable Long id, @Valid @RequestBody TaskUpdateDto dto) {
+    public ResponseEntity<TaskResponseDto> changeNameOrDesc(@PathVariable Long id, @Valid @RequestBody UpdateTaskRequest dto) {
         return ResponseEntity.ok(taskService.updateTask(id, dto));
     }
 

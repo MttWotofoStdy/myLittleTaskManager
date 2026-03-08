@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class TaskChangeStatus {
+public class PatchTaskStatusRequest {
 
     @NotNull
     private TaskStatus status;

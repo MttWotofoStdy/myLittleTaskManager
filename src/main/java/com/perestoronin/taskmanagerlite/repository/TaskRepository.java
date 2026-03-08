@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long>, JpaSpecificationExecutor<Task> {
-    List<Task> findByStatus(TaskStatus taskStatus);
+    List<Optional> findByStatus(TaskStatus taskStatus);
 
     Optional<Task> getTasksById(Long id);
 }

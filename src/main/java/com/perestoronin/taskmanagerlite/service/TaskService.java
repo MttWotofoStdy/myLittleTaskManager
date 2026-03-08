@@ -55,7 +55,7 @@ public class TaskService {
     }
 
     @Transactional
-    public TaskResponseDto changeStatus(Long id, @Valid TaskChangeStatus newStatus) {
+    public TaskResponseDto changeStatus(Long id, @Valid PatchTaskStatusRequest newStatus) {
         Task currTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         if (newStatus.getStatus() == null) {
             throw new IllegalArgumentException("Статус не может быть пустым");
@@ -66,7 +66,7 @@ public class TaskService {
     }
 
     @Transactional
-    public TaskResponseDto updateTask(Long id, @Valid TaskUpdateDto dto) {
+    public TaskResponseDto updateTask(Long id, @Valid UpdateTaskRequest dto) {
         Task currTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         currTask.setName(dto.getName());
         if (dto.getDescription() == null && !dto.getDescription().isBlank()) {
