@@ -1,5 +1,6 @@
 package com.perestoronin.taskmanagerlite.dto.users;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,5 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateUserRequest {
     @NotNull(message = "пустое имя!")
+    @NotBlank
     private String name;
 }

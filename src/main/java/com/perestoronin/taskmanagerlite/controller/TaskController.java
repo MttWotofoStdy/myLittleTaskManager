@@ -35,7 +35,7 @@ public class TaskController {
             @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @SortDefault(sort = "id", direction = Sort.Direction.ASC) // <— сортировка
+            @SortDefault(sort = "id", direction = Sort.Direction.ASC)
             Sort sort
     ) {
         Pageable pageable = PageRequest.of(page, Math.min(size, 50), sort);

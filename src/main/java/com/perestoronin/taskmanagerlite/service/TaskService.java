@@ -69,11 +69,10 @@ public class TaskService {
     public TaskResponseDto updateTask(Long id, @Valid TaskUpdateDto dto) {
         Task currTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         currTask.setName(dto.getName());
-        if (dto.getDescription() != null && !dto.getDescription().isBlank()) {
-            currTask.setDescription(dto.getDescription());
-        } else{
-            currTask.setDescription(null);
+        if (dto.getDescription() == null && !dto.getDescription().isBlank()) {
+                     currTask.setDescription(null);
         }
+
         return taskMapper.toTaskResponseDto(currTask);
     }
 

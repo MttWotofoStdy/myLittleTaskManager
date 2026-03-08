@@ -32,6 +32,7 @@ public class UserService {
     @Transactional
     public List<GetUserRequest> getAllUsers() {
         return userRepository.findAll().stream().map(userMapper::toFullUser).toList();
+
     }
 
     @Transactional
@@ -48,19 +49,14 @@ public class UserService {
 
     @Transactional
     public GetUserRequest createUser(CreateUserRequest createUserRequest) {
-        User us1 = userMapper.toUser(createUserRequest);
-
         User user = userRepository.save(userMapper.toUser(createUserRequest));
-        if (createUserRequest.getName() == null || createUserRequest.getName().isBlank()) {
-            throw new IllegalArgumentException("нельзя пустое имя!");
-        }
         return userMapper.toFullUser(user);
     }
 
     @Transactional
-    public  EditUserRequest editUser(Long id, EditUserRequest edUs) {
+    public EditUserRequest editUser(Long id, EditUserRequest edUs) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        if(edUs.getName() == null || edUs.getName().isBlank()){
+        if (edUs.getName() == null || edUs.getName().isBlank()) {
             throw new IllegalArgumentException(edUs.getName());
         }
         if (edUs.getGrade() != null) {
