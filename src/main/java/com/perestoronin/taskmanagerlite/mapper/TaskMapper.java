@@ -2,7 +2,6 @@ package com.perestoronin.taskmanagerlite.mapper;
 
 import com.perestoronin.taskmanagerlite.dto.tasks.TaskDto;
 import com.perestoronin.taskmanagerlite.dto.tasks.CreateTaskRequest;
-import com.perestoronin.taskmanagerlite.dto.tasks.TaskResponseDto;
 import com.perestoronin.taskmanagerlite.entity.TaskStatus;
 import com.perestoronin.taskmanagerlite.entity.Task;
 import org.springframework.stereotype.Component;
@@ -15,19 +14,19 @@ public class TaskMapper {
         dto.setId(task.getId());
         dto.setName(task.getName());
         dto.setDescription(task.getDescription());
-       dto.setStatus(task.getStatus());
+        dto.setStatus(task.getStatus());
         return dto;
     }
 
 
-public TaskResponseDto toTaskResponseDto(Task task){
-        TaskResponseDto taskResponseDto = new TaskResponseDto();
-        taskResponseDto.setName(task.getName());
-        taskResponseDto.setDescription(task.getDescription());
-        return taskResponseDto;
-    }
+//    public TaskResponseDto toTaskResponseDto(Task task) {
+//        TaskResponseDto taskResponseDto = new TaskResponseDto();
+//        taskResponseDto.setName(task.getName());
+//        taskResponseDto.setDescription(task.getDescription());
+//        return taskResponseDto;
+//    }
 
-    public Task toTask(CreateTaskRequest createTaskRequest){
+    public Task toTask(CreateTaskRequest createTaskRequest) {
         Task thisTask = new Task();
 
         thisTask.setName(createTaskRequest.getName());

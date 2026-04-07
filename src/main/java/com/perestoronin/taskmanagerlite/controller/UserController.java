@@ -8,11 +8,13 @@ import com.perestoronin.taskmanagerlite.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping("/users")
 public class UserController {
     private final UserService userservice;
@@ -27,11 +29,12 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable @Valid @Min(1) Long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable @Min(1) Long id) {
         userservice.deleteUser(id);
         return ResponseEntity.noContent().build();
 
     }
+
 
     @PostMapping
     public ResponseEntity<GetUserRequest> createUser(@Valid @RequestBody CreateUserRequest cur) {
@@ -39,8 +42,8 @@ public class UserController {
     }
 
 
-    @PostMapping("/{id}")
-    public ResponseEntity<EditUserRequest> editUser(@PathVariable Long id, @RequestBody  EditUserRequest edUs) {
+    @PatchMapping("/{id}")
+    public ResponseEntity<EditUserRequest> editUser(@PathVariable @Min(1) Long id, @Valid @RequestBody  EditUserRequest edUs) {
         return ResponseEntity.ok(userservice.editUser(id, edUs));
     }
 

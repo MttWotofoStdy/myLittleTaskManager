@@ -36,13 +36,15 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(@Valid @Min(1) Long id) {
-
-        userRepository.deleteById(getCurrentUser(id).getId());
+    public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException(id);
+        }
+        userRepository.deleteById(id);
     }
 
-    @Transactional
-    public GetUserRequest getCurrentUser(@Valid @Min(1) Long id) {
+    @Transactional(readOnly = true)
+    public GetUserRequest getCurrentUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return userMapper.toFullUser(user);
     }
@@ -56,9 +58,7 @@ public class UserService {
     @Transactional
     public EditUserRequest editUser(Long id, EditUserRequest edUs) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        if (edUs.getName() == null || edUs.getName().isBlank()) {
-            throw new IllegalArgumentException(edUs.getName());
-        }
+       user.setName(edUs.getName());
         if (edUs.getGrade() != null) {
             user.setGrade(edUs.getGrade());
         }

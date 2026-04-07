@@ -29,14 +29,14 @@ public class TaskService {
 
 
     @Transactional
-    public Page<TaskResponseDto> getAllTasks(
+    public Page<TaskDto> getAllTasks(
             TaskStatus status,
             String name,
             Pageable pageable
     ) {
         Specification<Task> spec = TaskSpecification.combine(status, name);
         Page<Task> tasks = taskRepository.findAll(spec, pageable);
-        return tasks.map(taskMapper::toTaskResponseDto);
+        return tasks.map(taskMapper::toFullTaskResponseDto);
     }
 
     @Transactional
@@ -55,25 +55,25 @@ public class TaskService {
     }
 
     @Transactional
-    public TaskResponseDto changeStatus(Long id, @Valid PatchTaskStatusRequest newStatus) {
+    public TaskDto changeStatus(Long id, @Valid UpdateTaskStatusRequest newStatus) {
         Task currTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         if (newStatus.getStatus() == null) {
             throw new IllegalArgumentException("Статус не может быть пустым");
         }
         currTask.setStatus(newStatus.getStatus());
         taskRepository.save(currTask);
-        return taskMapper.toTaskResponseDto(currTask);
+        return taskMapper.toFullTaskResponseDto(currTask);
     }
 
     @Transactional
-    public TaskResponseDto updateTask(Long id, @Valid UpdateTaskRequest dto) {
+    public TaskDto updateTask(Long id, @Valid UpdateTaskRequest dto) {
         Task currTask = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         currTask.setName(dto.getName());
         if (dto.getDescription() == null && !dto.getDescription().isBlank()) {
                      currTask.setDescription(null);
         }
 
-        return taskMapper.toTaskResponseDto(currTask);
+        return taskMapper.toFullTaskResponseDto(currTask);
     }
 
     @Transactional
