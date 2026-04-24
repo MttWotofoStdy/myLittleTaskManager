@@ -20,7 +20,6 @@ public class Task {
     private String name;
     @Column
     private String description;
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
 }
