@@ -5,6 +5,7 @@ import com.perestoronin.taskmanagerlite.entity.TaskStatus;
 import com.perestoronin.taskmanagerlite.service.TaskService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -59,23 +60,23 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable @Min(1) Long id) {
+    public ResponseEntity<Void> deleteTask(@PathVariable @Positive Long id) {
             taskService.deleteTaskById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<TaskDto> changeStatus(@PathVariable @Min(1) Long id, @Valid @RequestBody UpdateTaskStatusRequest newStatus) {
+    public ResponseEntity<TaskDto> changeStatus(@PathVariable @Positive Long id, @Valid @RequestBody UpdateTaskStatusRequest newStatus) {
         return ResponseEntity.ok(taskService.changeStatus(id, newStatus));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<TaskDto> changeNameOrDesc(@PathVariable @Min(1) Long id, @Valid @RequestBody UpdateTaskRequest dto) {
+    public ResponseEntity<TaskDto> changeNameOrDesc(@PathVariable @Positive Long id, @Valid @RequestBody UpdateTaskRequest dto) {
         return ResponseEntity.ok(taskService.updateTask(id, dto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskDto> getCurrTask(@PathVariable @Min(1) Long id) {
+    public ResponseEntity<TaskDto> getCurrTask(@PathVariable @Positive Long id) {
        TaskDto task = taskService.getTaskById(id);
        return ResponseEntity.ok(task);
     }
