@@ -5,7 +5,7 @@ import lombok.*;
 
 
 @Entity
-@Table(name = "tasks")
+@Table(name = "taski")
 @Getter
 @Setter
 @NoArgsConstructor
