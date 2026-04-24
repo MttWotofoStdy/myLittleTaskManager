@@ -19,7 +19,7 @@ public class GlobalHandlerException {
     @ExceptionHandler(IllegalArgumentException.class)
     public ProblemDetail handleIllegalArgument(IllegalArgumentException ex, WebRequest request) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
-        problem.setProperty("path", request.getDescription(false));
+        problem.setProperty("pa th", request.getDescription(false));
         return problem;
     }
 }

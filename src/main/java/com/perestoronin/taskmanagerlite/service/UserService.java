@@ -9,9 +9,6 @@ import com.perestoronin.taskmanagerlite.exception.usersexception.UserNotFoundExc
 import com.perestoronin.taskmanagerlite.mapper.UserMapper;
 import com.perestoronin.taskmanagerlite.repository.UserRepository;
 
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserService {
+public class    UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 

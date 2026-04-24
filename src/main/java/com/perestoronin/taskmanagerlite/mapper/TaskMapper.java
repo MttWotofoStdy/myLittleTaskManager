@@ -10,12 +10,7 @@ import org.springframework.stereotype.Component;
 public class TaskMapper {
 
     public TaskDto toFullTaskResponseDto(Task task) {
-        TaskDto dto = new TaskDto();
-        dto.setId(task.getId());
-        dto.setName(task.getName());
-        dto.setDescription(task.getDescription());
-        dto.setStatus(task.getStatus());
-        return dto;
+        return new TaskDto(task.getId(), task.getName(), task.getDescription(), task.getStatus());
     }
 
 
