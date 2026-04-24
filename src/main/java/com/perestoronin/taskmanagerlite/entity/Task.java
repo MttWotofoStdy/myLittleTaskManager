@@ -18,9 +18,8 @@ public class Task {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = true)
-    private String description;
     @Column
+    private String description;
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
 }
